@@ -113,7 +113,7 @@ const HomePage = () => {
         setGetphuong2(res.data)
     }
     const AddSV = (event) => {
-        event.preventDefault()
+
         let Add = async () => {
             const formData = new FormData()
             formData.append("phuong", phuong)
