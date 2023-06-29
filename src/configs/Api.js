@@ -4,10 +4,14 @@ import cookies from "react-cookies"
 
 export let endpoints = {
 
-    
-    "quan" : "/quan/",
+
+    "quan": "/quan/",
     "phuong": (quanId) => `/quan/${quanId}/phuong/`,
-    "product": "/products/",
+    "dontuyensinh": "/dontuyensinh/",
+    "trinhdo": "/trinhdo/",
+    "truong": (quanId) => `/quan/${quanId}/truong/`,
+    "chonlop": '/dangkyhoc/',
+
 
 
 
