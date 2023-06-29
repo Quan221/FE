@@ -18,7 +18,7 @@ export let endpoints = {
 }
 export const authApi = () => {
     return axios.create({
-        baseURL: "http://127.0.0.1:8000/",
+        baseURL: "http://quan271001.pythonanywhere.com/",
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('userToken')}`
         }
@@ -27,6 +27,6 @@ export const authApi = () => {
 
 
 export default axios.create({
-    baseURL: "http://127.0.0.1:8000/"
+    baseURL: "http://quan271001.pythonanywhere.com/"
 
 })
