@@ -36,7 +36,7 @@ const HomePage = () => {
     const [suckhoe, setSuckhoe] = useState()
     const [tiengviet5, setTiengviet5] = useState()
     const [toan5, setToan5] = useState()
-    const [tongdiem, setTongdiem] = useState()
+    const [diencutru, setDiencutru] = useState()
     const [cambridge, setCambridge] = useState()
     const [toefl, setToefl] = useState()
     const [pearson, setPearson] = useState()
@@ -113,7 +113,7 @@ const HomePage = () => {
         setGetphuong2(res.data)
     }
     const AddSV = (event) => {
-
+        event.preventDefault()
         let Add = async () => {
             const formData = new FormData()
             formData.append("phuong", phuong)
@@ -162,7 +162,8 @@ const HomePage = () => {
             formData.append("pearson", pearson)
             formData.append("toefl", toefl)
             formData.append("hocba", hocba)
-
+            formData.append("choDK", choDK)
+            formData.append("diencutru", diencutru)
 
 
 
@@ -239,6 +240,16 @@ const HomePage = () => {
                         <Col>
                             <Form.Label>Chỗ Ở Hiện Nay</Form.Label>
                             <Form.Control type="text" required value={choDK} onChange={(event) => setChoDK(event.target.value)} />
+                        </Col>
+                        <Col>
+                            <Form.Label>Diện Cư Trú</Form.Label>
+                            <FormSelect value={truong} onChange={(event) => setTruong(event.target.value)}  >
+                                <option disabled selected='true' >Chọn danh mục</option>
+                                <option value="Thường Trú">Thường Trú</option>
+                                <option value="Tạm Trú">Tạm Trú</option>
+                                <option value="Diện Khác">Diện Khác</option>
+
+                            </FormSelect>
                         </Col>
 
                     </Form.Group>
@@ -368,10 +379,10 @@ const HomePage = () => {
                         <Col>
                             <InputGroup>
                                 <InputGroup.Text>Quận : </InputGroup.Text>
-                                <FormSelect value={quanthuongtru} onChange={(event) => setQuanthuongtru(event.target.value)}  >
+                                <FormSelect value={quanthuongtru} onChange={(event) => { setQuanthuongtru(event.target.value); const selectedOption = event.target.options[event.target.selectedIndex]; getPhuong(selectedOption.getAttribute('data-id')); }}   >
                                     <option disabled selected='true' >Chọn danh mục</option>
                                     {getquan.map(c => {
-                                        return <option value={c.name} onClick={() => getPhuong(c.id)} >{c.name}</option>
+                                        return <option value={c.name} data-id={c.id} >{c.name}</option>
                                     })}
 
                                 </FormSelect>
@@ -405,10 +416,10 @@ const HomePage = () => {
                         <Col>
                             <InputGroup>
                                 <InputGroup.Text>Quận : </InputGroup.Text>
-                                <FormSelect value={quan} onChange={(event) => setQuan(event.target.value)}  >
+                                <FormSelect value={quan} onChange={(event) => { setQuan(event.target.value); const selectedOption = event.target.options[event.target.selectedIndex]; getPhuong2(selectedOption.getAttribute('data-id')); }} >
                                     <option disabled selected='true' >Chọn danh mục</option>
                                     {getquan.map(c => {
-                                        return <option value={c.id} onClick={() => getPhuong2(c.id)} >{c.name}</option>
+                                        return <option value={c.id} data-id={c.id}>{c.name}</option>
                                     })}
 
                                 </FormSelect>
