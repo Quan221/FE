@@ -64,6 +64,7 @@ const HomePage = () => {
     const [gettrinhdo, setGettrinhdo] = useState([])
     const [getphuong2, setGetphuong2] = useState([])
     const [dangkyhoc, setDangkyhoc] = useState()
+    const tongdiem = (parseFloat(toan5) + parseFloat(tiengviet5))
 
     useEffect(() => {
 
@@ -85,6 +86,7 @@ const HomePage = () => {
         const chonLop = async () => {
             const res = await Api.get(endpoints['chonlop'])
             setChonlop(res.data)
+            console.log(res.data)
         }
 
         loadQuan()
@@ -139,7 +141,7 @@ const HomePage = () => {
             formData.append("boi", boi)
             formData.append("toan5", toan5)
             formData.append("tiengviet5", tiengviet5)
-            formData.append("tongdiem", tiengviet5 + toan5)
+            formData.append("tongdiem", tongdiem)
             formData.append("suckhoe", suckhoe)
             formData.append("dienchinhsach", dienchinhsach)
             formData.append("phuongthuongtru", phuongthuongtru)
@@ -165,6 +167,9 @@ const HomePage = () => {
             formData.append("choDK", choDK)
             formData.append("diencutru", diencutru)
 
+            console.log(dangkyhoc)
+
+
 
 
 
@@ -176,11 +181,60 @@ const HomePage = () => {
                         "Content-Type": "multipart/form-data"
                     }
 
+
                 })
+                setSdtme('')
+                setNoicongtacme('')
+                setChucvume('')
+                setNghenghiepme('')
+                setNamsinhme('')
+                setTenme('')
+                setBoi('')
+                setCambridge('')
+                setChoDK('')
+                setChonlop('')
+                setChucvu()
+                setChucvume()
+                setDantoc()
+                setDiachi()
+                setDiachithuongtru()
+                setDienchinhsach()
+                setDiencutru()
+                setDinhdanh()
+                setGioitinh()
+                setHocba()
+                setHokhaunguoiDK()
+                setIDdk()
+                setMoiquanhe()
+                setNangkhieu()
+                setNgaysinh()
+                setNamsinhcha()
+                setNghenghiepcha()
+                setNoicongtac()
+                setNoisinh()
+                setPearson()
+                setToefl()
+                setToan5()
+                setTiengviet5()
+                setPhuong()
+                setQuan()
+                setPhuongthuongtru()
+                setQuanthuongtru()
+                setSdt()
+                setSdtcha()
+                setSdtme()
+                setSuckhoe()
+                setTdtt()
+                setTenDK()
+                setTenHS()
+                setTenme()
+                setTntp()
+                setTongiao()
 
 
             } catch (err) {
                 console.error(err)
+                console.log(tongdiem)
             }
             // axios({
             //     method : 'POST',
@@ -191,6 +245,7 @@ const HomePage = () => {
 
         }
         Add()
+
 
     }
 
@@ -214,20 +269,22 @@ const HomePage = () => {
 
                             <Form.Control type="text" value={tenDK} required onChange={(event) => setTenDK(event.target.value)} />
                         </Col>
+                        <Col>
+                            <Form.Label>Cha/Mẹ/Người giám hộ</Form.Label>
+                            <Form.Control type="text" value={moiquanhe} required onChange={(event) => setMoiquanhe(event.target.value)} />
+
+                        </Col>
+
+                        <Col sm='3' >
+                            <Form.Label>CCCD</Form.Label>
+                            <Form.Control type="text" value={IDdk} required onChange={(event) => setIDdk(event.target.value)} />
+                        </Col>
                         <Col sm='2' >
                             <Form.Label >Số Điện Thoại</Form.Label>
 
                             <Form.Control type="text" value={sdt} required onChange={(event) => setSdt(event.target.value)} />
                         </Col>
-                        <Col sm='3' >
-                            <Form.Label>CCCD</Form.Label>
-                            <Form.Control type="text" value={IDdk} required onChange={(event) => setIDdk(event.target.value)} />
-                        </Col>
-                        <Col>
-                            <Form.Label>Mối Quan Hệ Với Học Sinh</Form.Label>
-                            <Form.Control type="text" value={moiquanhe} required onChange={(event) => setMoiquanhe(event.target.value)} />
 
-                        </Col>
 
 
                     </Form.Group>
@@ -237,20 +294,12 @@ const HomePage = () => {
                             <Form.Label>Hộ Khẩu Thường Trú</Form.Label>
                             <Form.Control type="text" value={hokhaunguoiDK} required onChange={(event) => setHokhaunguoiDK(event.target.value)} />
                         </Col>
+
                         <Col>
                             <Form.Label>Chỗ Ở Hiện Nay</Form.Label>
                             <Form.Control type="text" required value={choDK} onChange={(event) => setChoDK(event.target.value)} />
                         </Col>
-                        <Col>
-                            <Form.Label>Diện Cư Trú</Form.Label>
-                            <FormSelect value={truong} onChange={(event) => setTruong(event.target.value)}  >
-                                <option disabled selected='true' >Chọn danh mục</option>
-                                <option value="Thường Trú">Thường Trú</option>
-                                <option value="Tạm Trú">Tạm Trú</option>
-                                <option value="Diện Khác">Diện Khác</option>
 
-                            </FormSelect>
-                        </Col>
 
                     </Form.Group>
                     <Form.Group as={Row}>
@@ -292,9 +341,23 @@ const HomePage = () => {
 
                     <h3 style={{ marginTop: '2%' }} >B. THÔNG TIN VỀ HỌC SINH </h3>
                     <Form.Group as={Row}>
+                        <Col>
+                            <Form.Label>Mã định danh</Form.Label>
+                            <Form.Control type="text" value={dinhdanh} onChange={(event) => setDinhdanh(event.target.value)} />
+                        </Col>
                         <Col  >
                             <Form.Label>Tên Học Sinh</Form.Label>
                             <Form.Control type="text" value={tenHS} onChange={(event) => setTenHS(event.target.value)} />
+                        </Col>
+
+
+
+                    </Form.Group>
+                    <Form.Group as={Row}>
+
+                        <Col>
+                            <Form.Label>Nơi Sinh</Form.Label>
+                            <Form.Control type="text" value={noisinh} onChange={(event) => setNoisinh(event.target.value)} />
                         </Col>
                         <Col sm='3' >
                             <Form.Label>
@@ -333,16 +396,9 @@ const HomePage = () => {
                         </Col>
 
 
+
                     </Form.Group>
                     <Form.Group as={Row}>
-                        <Col>
-                            <Form.Label>Mã định danh</Form.Label>
-                            <Form.Control type="text" value={dinhdanh} onChange={(event) => setDinhdanh(event.target.value)} />
-                        </Col>
-                        <Col>
-                            <Form.Label>Nơi Sinh</Form.Label>
-                            <Form.Control type="text" value={noisinh} onChange={(event) => setNoisinh(event.target.value)} />
-                        </Col>
                         <Col>
                             <Form.Label>Dân Tộc</Form.Label>
                             <Form.Control type="text" value={dantoc} onChange={(event) => setDantoc(event.target.value)} />
@@ -351,7 +407,16 @@ const HomePage = () => {
                             <Form.Label>Tôn Giáo</Form.Label>
                             <Form.Control type="text" value={tongiao} onChange={(event) => setTongiao(event.target.value)} />
                         </Col>
+                        <Col>
+                            <Form.Label>Diện Cư Trú</Form.Label>
+                            <FormSelect value={diencutru} onChange={(event) => setDiencutru(event.target.value)}  >
+                                <option disabled selected='true' >Chọn danh mục</option>
+                                <option value="Thường Trú">Thường Trú</option>
+                                <option value="Tạm Trú">Tạm Trú</option>
+                                <option value="Diện Khác">Diện Khác</option>
 
+                            </FormSelect>
+                        </Col>
 
                     </Form.Group>
                     <Form.Group as={Row} >
@@ -447,14 +512,14 @@ const HomePage = () => {
                             {/* <Form.Label>Số nhà , tên đường : </Form.Label> */}
                             <InputGroup>
                                 <InputGroup.Text>Tiếng Việt</InputGroup.Text>
-                                <Form.Control type="text" value={tiengviet5} onChange={(event) => setTiengviet5(event.target.value)} />
+                                <Form.Control type="number" value={tiengviet5} onChange={(event) => setTiengviet5(event.target.value)} />
                             </InputGroup>
                         </Col>
                         <Col>
                             {/* <Form.Label>Số nhà , tên đường : </Form.Label> */}
                             <InputGroup>
                                 <InputGroup.Text>Toán</InputGroup.Text>
-                                <Form.Control type="text" value={toan5} onChange={(event) => setToan5(event.target.value)} />
+                                <Form.Control type="number" value={toan5} onChange={(event) => setToan5(event.target.value)} />
                             </InputGroup>
                         </Col>
 
@@ -464,17 +529,17 @@ const HomePage = () => {
                         {/* <Form.Control type="text" value={hocba} onChange={(event) => setHocba(event.target.value)} /> */}
                         <Col>
                             <Form.Label> Chứng chỉ Cambridge </Form.Label>
-                            <Form.Control type="text" value={cambridge} onChange={(event) => setCambridge(event.target.value)} />
+                            <Form.Control type="number" value={cambridge} onChange={(event) => setCambridge(event.target.value)} />
 
                         </Col>
                         <Col>
                             <Form.Label> Chứng chỉ Toefl </Form.Label>
-                            <Form.Control type="text" value={toefl} onChange={(event) => setToefl(event.target.value)} />
+                            <Form.Control type="number" value={toefl} onChange={(event) => setToefl(event.target.value)} />
 
                         </Col>
                         <Col>
                             <Form.Label> Chứng chỉ pearson </Form.Label>
-                            <Form.Control type="text" value={pearson} onChange={(event) => setPearson(event.target.value)} />
+                            <Form.Control type="number" value={pearson} onChange={(event) => setPearson(event.target.value)} />
 
                         </Col>
 
@@ -617,7 +682,7 @@ const HomePage = () => {
                     <br />
                     <span style={{ fontSize: '20px', margin: '10px' }} >Chỉ chọn 1 trong các hình thức lớp dưới đây </span>
                     <FormSelect value={dangkyhoc} onChange={(event) => setDangkyhoc(event.target.value)}  >
-                        <option disabled selected='true' >Chọn danh mục</option>
+                        {/* <option disabled selected='true' >Chọn danh mục</option> */}
                         {chonlop.map(c => {
                             return <option value={c.id}  >{c.name}</option>
                         })}
